@@ -33,6 +33,8 @@ Projeto do curso "API com Django 3: Versionamento, cabeçalhos e CORS" da Alura
 - pip install djangorestframework
 - pip install markdown
 - pip install django-filter
+- pip install validate-docbr
+- pip install Faker
 
 ## Exibir pacotes instalados
 
