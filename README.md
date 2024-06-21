@@ -35,6 +35,7 @@ Projeto do curso "API com Django 3: Versionamento, cabeçalhos e CORS" da Alura
 - pip install django-filter
 - pip install validate-docbr
 - pip install Faker
+- pip install django-cors-headers
 
 ## Exibir pacotes instalados
 

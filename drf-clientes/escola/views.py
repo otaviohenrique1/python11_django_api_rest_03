@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, generics, status
 from escola.models import Aluno, Curso, Matricula
 from escola.serializer import (
     AlunoSerializer,
@@ -9,6 +9,7 @@ from escola.serializer import (
     ListaAlunosMatriculadosSerializer,
     AlunoSerializerV2,
 )
+from rest_framework.response import Response
 # from rest_framework.authentication import BasicAuthentication
 # from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 
@@ -33,6 +34,15 @@ class CursosViewSet(viewsets.ModelViewSet):
 
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
+    def create(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = Response(serializer.data, status=status.HTTP_201_CREATED) 
+            id = str(serializer.data["id"])
+            response["Location"] = request.build_absolute_uri() + id
+            return response
+        
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated, DjangoModelPermissions]
 
